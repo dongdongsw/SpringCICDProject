@@ -15,7 +15,7 @@
                     <div class="breadcrumb__text">
                         <h2>상세보기</h2>
                         <div class="breadcrumb__option">
-                        	<span>서울</span>
+                            <span>부산</span>
                         </div>
                     </div>
                 </div>
@@ -33,7 +33,7 @@
                     <div class="product__details__pic">
                         <div class="product__details__pic__item">
                             <img class="product__details__pic__item--large"
-                                :src="store.detail.vo.poster" alt="">
+                                :src="store.detail.vo.image1" alt="">
                         </div>
                         
                     </div>
@@ -102,17 +102,16 @@
     </div>
     <!-- Related Product Section End -->
     
-    <script src="/seouljs/seoulStore.js"></script>
+    <script src="/busanjs/busanStore.js"></script>
 	<script>
 		const detailApp = Vue.createApp({
 			setup(){
-				const store = useSeoulStore()
+				const store = useBusanStore()
 				const params = new URLSearchParams(location.search)
 				const no = params.get('no')
-				const type = params.get('type')
 				
 				Vue.onMounted(()=>{
-					store.seoulDetailData(no, type)
+					store.busanDetailData(no, 1)
 				})
 				
 				return {

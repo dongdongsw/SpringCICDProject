@@ -40,4 +40,6 @@
  		FROM busantravel
  		<include refid="where-sql"/>
  	</select>
+ 	
+ 	
  </mapper>

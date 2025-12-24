@@ -9,7 +9,10 @@ const useBusanStore = defineStore('busan',{
 		startPage:0,
 		endPage:0,
 		type:1,
-		detail:{}
+		detail:{
+			vo:{},
+			list:[]
+		}
 	}),
 	// 기능 설정 => axios => BASE_URL
 	actions:{
@@ -51,10 +54,18 @@ const useBusanStore = defineStore('busan',{
 				start++;
 			}
 			return arr
-		}
-		
-		
+		},
 		// 상세보기
+		async busanDetailData(no,type){
+			const res = await axios.get('http://localhost:8080/busan/detail_vue/',{
+				params:{
+					no:no,
+							
+				}
+			})
+			console.log(res.data)
+			this.detail = res.data
+		}
 		
 	}
 })

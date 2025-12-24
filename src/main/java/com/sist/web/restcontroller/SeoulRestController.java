@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sist.web.service.SeoulService;
+import com.sist.web.vo.FoodVO;
 import com.sist.web.vo.SeoulVO;
 
 import lombok.RequiredArgsConstructor;
@@ -74,8 +75,11 @@ public class SeoulRestController {
 			map.put("no", no);
 			
 			SeoulVO vo = sService.seoulDetailData(map);
+			String[] datas = vo.getAddress().split(" ");
 			
+			List<FoodVO> list = sService.foodNearData4(datas[2]);
 			map.put("vo", vo);
+			map.put("list", list);
 			
 		} catch (Exception ex) {
 			ex.printStackTrace();
@@ -86,4 +90,6 @@ public class SeoulRestController {
 		
 		return new ResponseEntity<>(map, HttpStatus.OK);
 	}
+	
+	
 }

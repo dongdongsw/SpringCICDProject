@@ -34,4 +34,11 @@ public class BusanController {
 		model.addAttribute("main_jsp","../busan/busan_main.jsp");
 		return "main/main";
 	}
+	
+	@GetMapping("/busan/detail")
+	public String busan_detail(Model model) {
+		
+		model.addAttribute("main_jsp","../busan/detail.jsp");
+		return "main/main";
+	}
 }

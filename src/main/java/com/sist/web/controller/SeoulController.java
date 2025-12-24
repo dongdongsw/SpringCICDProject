@@ -37,5 +37,11 @@ public class SeoulController {
 		return "main/main";
 	}
 	
+	@GetMapping("/seoul/detail")
+	public String seoul_detail(Model model) {
+		
+		model.addAttribute("main_jsp", "../seoul/detail.jsp");
+		return"main/main";
+	}
 	
 }

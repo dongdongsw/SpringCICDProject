@@ -19,4 +19,9 @@
  		FROM ${table_name}
  	</select>
  	
+ 	<select id="seoulDetailData" resultType="com.sist.web.vo.SeoulVO" parameterType="hashmap">
+ 		SELECT no, title, poster, address, hit, msg
+ 		FROM ${table_name}
+ 		WHERE no = #{no}
+ 	</select>
  </mapper>

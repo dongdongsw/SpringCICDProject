@@ -64,4 +64,26 @@ public class SeoulRestController {
 		
 		return new ResponseEntity<>(map, HttpStatus.OK);
 	}
+	
+	@GetMapping("/detail_vue/")
+	public ResponseEntity<Map> seoul_detail_vue(@RequestParam("no") int no, @RequestParam("type") int type){
+		
+		Map map = new HashMap<>();
+		try {
+			map.put("table_name", tables[type]);
+			map.put("no", no);
+			
+			SeoulVO vo = sService.seoulDetailData(map);
+			
+			map.put("vo", vo);
+			
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+			
+		}
+		
+		
+		return new ResponseEntity<>(map, HttpStatus.OK);
+	}
 }

@@ -16,7 +16,7 @@ const useBusanStore = defineStore('busan',{
 		// 목록 => 페이지 처리
 		async busanListData(type){
 			this.type = type
-			const res = await axios.get('http://localhost:9090/busan/list_vue/',{
+			const res = await axios.get('http://localhost:8080/busan/list_vue/',{
 					params:{
 						page:this.curpage,
 						type:this.type

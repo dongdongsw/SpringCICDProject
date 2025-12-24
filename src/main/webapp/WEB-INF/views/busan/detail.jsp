@@ -50,7 +50,7 @@
                             <span>(18 reviews)</span>
                         </div>
                        
-                        <p>{{store.detail.vo.msg}}</p>
+                        <p></p>
                        
                         <ul>
                             <li><b>주소</b> <span>{{store.detail.vo.address}}</span></li>

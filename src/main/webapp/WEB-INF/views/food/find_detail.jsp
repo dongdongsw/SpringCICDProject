@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -83,20 +84,54 @@
 	   			<div id="map" style="width:100%;height:350px;"></div>
 	   		</div>
 	   		<!-- 댓글 -->
+	   		<div class="row" style="margin: 20px auto;" >
+	   			<table class="table">
+	   				<tr>
+	   					<td>
+	   						<table class="table" v-for="rvo in store.reply" :key="rvo.no">
+	   							<tr>
+	   								<td class="text-left">ㅁ{{rvo.name}}{{rvo.dbday}}</td>
+	   								<td class="text-right" v-if="store.sessionId === rvo.id">
+	   									<a href="#" class="btn btn-xs btn-info" >수정</a>
+	   									<a href="#" class="btn btn-xs btn-success">삭제</a>
+	   								</td>
+	   							</tr>
+	   							<tr>
+	   								<td colspan="2">
+	   									<pre style="white-space: pre-wrap; background: white;" >{{rvo.msg}}</pre>
+	   								</td>
+	   							</tr>
+	   						</table>
+	   					</td>
+	   				</tr>
+	   			</table>
+	   			<c:if test="${sessionScope.id!=null }">
+	   			<table class="table" >
+	   				<tr>
+	   					<td class="text-center" >
+	   						<textarea rows="4" cols="60" style="float: left" ref="msgRef" v-model="store.msg"></textarea>
+	   						 <button class="btn-success" style="width: 80px; height: 103px; float: left;" @click="store.foodReplyInsert(fno,msgRef)">댓글 쓰기</button>
+	   					</td>
+	   				</tr>
+	   			</table>
+	   			</c:if>
+	   		</div>
 	   </div>
 	</section>
 	<script src="/foodjs/foodStore.js"></script>
 	<script>
-		const {createApp, onMounted} = Vue
+		const {createApp, onMounted, ref} = Vue
 		const {createPinia} = Pinia
 		const app = createApp({
 			setup(){
 				const store = useFoodStore()
 				const params = new URLSearchParams(location.search)
 				const fno = params.get('fno')
+				const msgRef = ref(null)
 				
 				onMounted(()=>{
 					store.foodDetailData(fno)
+					store.foodReplyData(fno)
 					if(!store.address){
 						return
 					}
@@ -154,8 +189,11 @@
 				}
 				
 				return{
-					store
+					store,
+					msgRef,
+					fno
 				}
+			
 			}
 		})
 		app.use(createPinia())

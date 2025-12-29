@@ -1,10 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script>
+	window._LOGIN_={
+			sessionId : '<%= session.getAttribute("id") != null?session.getAttribute("id"):"" %>'
+			
+	}
+</script>
 </head>
 <body>
 	<!-- Header Section Begin -->
@@ -30,7 +37,12 @@
                             </div>
                            
                             <div class="header__top__right__auth">
-                                <a href="#"><i class="fa fa-user"></i> Login</a>
+                            	<c:if test="${sessionScope.id == null }">
+                                	<a href="/member/login"><i class="fa fa-user"></i> Login</a>
+                                </c:if>
+                                <c:if test="${sessionScope.id != null }">
+                                	<a href="/member/logout"><i class="fa fa-user"></i> Logout</a>
+                                </c:if>
                             </div>
                         </div>
                     </div>
